@@ -1,8 +1,82 @@
-body{
-    background: black;
+:root {
+    --red: #e60012;
+    --black: #0a0a0a;
+    --white: #ffffff;
 }
 
-h1 {
-    color: #e60012;
-    transform: rotate(-3deg);
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body{
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Anton', Impact, sans-serif;
+    overflow-x: hidden;
 }
+.stage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 8vw;
+    /* diagonal split: black on the left, red on the right */
+    background:
+    radial-gradient(circle, rgba(255,255,255,0.1) 2px, transparent 2.5px) 0 0 / 14px 14px,
+     linear-gradient(115deg, var(--black) 55%, var(--red) 55%);
+}
+.title{
+    font-size: clamp(3rem, 10vw, 8rem);
+    text-transform: uppercase;
+    transform: rotate(-4deg) skew(-8deg);
+    text-shadow: 6px 6px 0 var(--red);
+    margin-bottom: 3rem;
+}
+.menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 420px;
+}
+.menu a{
+    --tilt: -2deg;
+    transform: skew(-12deg) rotate(var(--tilt));
+    display: block;
+    padding: 0.6rem 2.5rem;
+    color: var(--white);
+    background: var(--red);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 2rem;
+    transform: skew(-12deg) rotate(-2deg);
+    clip-path: polygon(0 6%, 100% 0%, 97% 94%, 3% 100%);
+    transition: transform 0.15s, background 0.15s, color 0.15s;
+}
+.menu a:hover,
+.menu a:focus-visible,
+.menu a.active{
+    transform: skew(-12deg)rotate(var(--tilt)) translateX(20px) scale(1.08);
+    background: var(--white);
+    color: var(--black);
+    transform: skew(-12deg) rotate(-2deg) translateX(20px);
+}
+
+.menu li:nth-child(2) a {--tilt:1.5deg; }
+.menu li:nth-child(3) a {--tilt: -1deg;}
+.menu li {animation: menuIn 0.5s ease-out backwards; }
+.menu li:nth-child(2) a {animation-delay: 0.1s; }
+.menu li:nth-child(3) a {animation-delay: 0.2s;}
+.menu li { filter: drop-shadow(px 8px 0 var(--white)); }
+.menu li:hover,
+.menu li:focus-within{
+    filter: drop-shadow(8px 8px var(--red));
+}
+@keyframes menuIn {
+    from {transform: translateX(-120%);}
+}
+.ltr {
+  display: inline-block;
+  padding: 0 0.05em;
+  text-shadow: none;
+}
+.l0 { background: var(--white); color: var(--black); transform: rotate(-4deg); }
+.l1 { background: var(--black); color: var(--white); transform: rotate(3deg) translateY(-6px); box-shadow: 4px 4px 0 var(--red); }
+.l2 { background: var(--red); color: var(--white); transform: rotate(-2deg) translateY(4px); box-shadow: 4px 4px 0 var(--black); }
